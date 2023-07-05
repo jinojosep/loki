@@ -1,0 +1,24 @@
+"sretoolsRaw": {
+				"awsConsole": "https://d-90676794b7.awsapps.com/start/",
+				"accountLevel": {
+					"turbonomic": "https://turbo-dalh.platform.saas.ibm.com/vmturbo/oauth2/authorization/login.ibm.com",
+					"grafana": "https://grafana-dalh.platform.saas.ibm.com",
+					"prometheus": "https://prometheus-dalh.platform.saas.ibm.com",
+					"alertmanager": "https://alertmanager-dalh.platform.saas.ibm.com",
+					"thanos": "https://thanos-querier-dalh.platform.saas.ibm.com",
+					"loki": "https://loki-dalh.platform.saas.ibm.com",
+					"instana": "https://prod-dalhprod.instana.io/",
+					"argocd": "https://argocd-server-argocd-worker.apps.ap-dp-001.koh3.p1.openshiftapps.com/"
+				},
+				"regionLevel": {
+					"cloudwatch": "https://REGION_PLACEHOLDER.console.aws.amazon.com/cloudwatch/home?region=REGION_PLACEHOLDER",
+					"synthetic": "https://REGION_PLACEHOLDER.console.aws.amazon.com/cloudwatch/home?region=REGION_PLACEHOLDER#synthetics:canary/list",
+					"alarm": "https://REGION_PLACEHOLDER.console.aws.amazon.com/cloudwatch/home?region=REGION_PLACEHOLDER#alarmsV2:?~(alarmStateFilter~'ALARM)",
+					"cloudtrail": "https://REGION_PLACEHOLDER.console.aws.amazon.com/cloudtrail/home?region=REGION_PLACEHOLDER",
+					"sns": "https://REGION_PLACEHOLDER.console.aws.amazon.com/sns/v3/home?region=REGION_PLACEHOLDER",
+					"eventbridge": "https://REGION_PLACEHOLDER.console.aws.amazon.com/events/home?region=REGION_PLACEHOLDER#"
+				},
+				"clusterLevel": {
+					"prometheus": "ENTERPOINT_PLACEHOLDER/monitoring/dashboards/grafana-dashboard-prometheus?job=VARIABLE_ALL_OPTION_KEY&instance=VARIABLE_ALL_OPTION_KEY"
+				}
+			}
