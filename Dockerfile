@@ -16,7 +16,7 @@ ARG IMAGE_OPENSHIFT_TAGS
 ARG IMAGE_RELEASE
 
 
-LABEL org.label-schema.vendor="DEV" \
+LABEL org.label-schema.vendor="PROD" \
       org.label-schema.name="$IMAGE_NAME" \
       org.label-schema.description="$IMAGE_DESCRIPTION" \
       org.label-schema.vcs-ref=$VCS_REF \
