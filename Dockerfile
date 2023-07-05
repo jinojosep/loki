@@ -15,6 +15,7 @@ ARG IMAGE_SUMMARY
 ARG IMAGE_OPENSHIFT_TAGS
 ARG IMAGE_RELEASE
 
+
 LABEL org.label-schema.vendor="DEV" \
       org.label-schema.name="$IMAGE_NAME" \
       org.label-schema.description="$IMAGE_DESCRIPTION" \
