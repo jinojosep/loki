@@ -65,7 +65,7 @@ COPY config /opt/ibm/server/config
 COPY node_modules /opt/ibm/server/node_modules
 COPY public /opt/ibm/server/public
 
-ENV BABEL_DISABLE_CACHE=1
+ENV BABEL_DISABLE_CACHE=0
 EXPOSE 3000
 
 ENV NODE_ENV production
