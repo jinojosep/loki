@@ -1,0 +1,42 @@
+############################################################################
+# Development targets
+############################################################################
+
+# Builds a development image and tags it with test
+.PHONY: dev/push
+dev/push:
+	$(SELF) docker/arch/build TARGET_DOCKER_REGISTRY=docker-na.artifactory.swg-devops.com/hyc-controlplane-cicd-team-docker-local/scratch TARGET_VERSION_ARCH=$(shell git rev-parse --abbrev-ref HEAD)
+	$(SELF) docker/arch/image/push TARGET_DOCKER_REGISTRY=docker-na.artifactory.swg-devops.com/hyc-controlplane-cicd-team-docker-local/scratch TARGET_VERSION_ARCH=$(shell git rev-parse --abbrev-ref HEAD)
+
+.PHONY: dev/certificates
+dev/certificates:
+	node scripts/make-tls.js
+
+.PHONY: manifest
+manifest:
+	echo "$(TARGET_DOCKER_REGISTRY)"
+#	$(SELF) local/docker/arch/image/push/release-latest
+	$(SELF) docker/fatmanifest/build DOCKER_PLATFORMS="amd64" TARGET_DOCKER_REGISTRY="$(TARGET_DOCKER_REGISTRY)"
+
+
+## CICD integration: onepipeline
+docker-build:export TARGET_DOCKER_REGISTRY=docker-na.artifactory.swg-devops.com/hyc-controlplane-cicd-team-docker-local
+docker-build:export FVT_DOCKER_REPO=docker-na.artifactory.swg-devops.com/hyc-controlplane-cicd-team-docker-local/sreconsole/images
+.PHONY: docker-build
+docker-build:
+	if [ '$(TRAVIS_BRANCH)' == 'statusmaster' ]; then rm .build.config.js; cp .build.config-statusmaster.js .build.config.js; fi
+	contextPath=$(CONTEXT_PATH) npm run build:production
+	npm prune --production
+	docker build . -t ${CI_IMAGE}
+	
+
+## CICD integration: onepipeline
+docker-push:export FVT_DOCKER_REPO=docker-na.artifactory.swg-devops.com/hyc-controlplane-cicd-team-docker-local/sreconsole/images
+.PHONY: test docker-push
+docker-push:
+	docker push ${CI_IMAGE}
+	docker tag ${CI_IMAGE} ${FVT_DOCKER_REPO}/sreconsole-ui-aws:${CI_IMAGE_TAG}
+	echo $(DOCKER_PASSWORD) | docker login -u $(DOCKER_USERNAME) --password-stdin $(TARGET_DOCKER_REGISTRY)
+	docker push ${FVT_DOCKER_REPO}/sreconsole-ui-aws:${CI_IMAGE_TAG}
+	docker tag ${FVT_DOCKER_REPO}/sreconsole-ui-aws:${CI_IMAGE_TAG} ${FVT_DOCKER_REPO}/sreconsole-ui-aws:unreleased-latest
+	docker push ${FVT_DOCKER_REPO}/sreconsole-ui-aws:unreleased-latest
