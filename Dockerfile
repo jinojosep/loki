@@ -48,7 +48,7 @@ RUN microdnf remove gzip && \
     microdnf clean all && \
     rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
-WORKDIR /opt/ibm/server
+WORKDIR /opt/ibm/server1
 
 COPY DomainVerification.html /opt/ibm/server/DomainVerification.html
 COPY DomainVerification-scorecard.html /opt/ibm/server/DomainVerification-scorecard.html
